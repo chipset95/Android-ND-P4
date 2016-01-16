@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger;
+package com.udacity.gradle.builditbigger.joke.show;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

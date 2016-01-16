@@ -1,13 +1,16 @@
-package com.udacity.gradle.builditbigger;
+package com.udacity.gradle.builditbigger.joke.show;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.gradle.builditbigger.joker.java.JokeMaker;
 
 
 /**
@@ -32,5 +35,19 @@ public class MainActivityFragment extends Fragment {
                 .build();
         mAdView.loadAd(adRequest);
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final TextView instructionsTextView = (TextView) view.findViewById(R.id.instructions_text_view);
+        Button getJokeButton = (Button) view.findViewById(R.id.get_joke_button);
+
+        getJokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                instructionsTextView.setText(new JokeMaker().getAJoke());
+            }
+        });
     }
 }
