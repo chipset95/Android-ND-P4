@@ -17,3 +17,12 @@ allprojects {
         jcenter()
     }
 }
+
+task runAllTask {
+    dependsOn = [":jokes-teller-api:appengineRun",
+                 ":jokes-android-app:connectedAndroidTest",
+                 ":jokes-teller-api:appengineStop"]
+    doLast {
+        println 'Run all task completed'
+    }
+}
