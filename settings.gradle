@@ -1,1 +1,1 @@
-include ':app', ':jokes-java', ':jokes-android', ':joke-teller'
+include ':jokes-android-app', ':jokes-java-lib', ':jokes-android-lib', ':jokes-teller-api'

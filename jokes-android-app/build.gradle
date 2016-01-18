@@ -26,8 +26,8 @@ android {
 }
 
 dependencies {
-    compile project(':jokes-android')
-    compile project(path: ':joke-teller', configuration: 'android-endpoints')
+    compile project(':jokes-android-lib')
+    compile project(path: ':jokes-teller-api', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
 }
