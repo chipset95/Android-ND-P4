@@ -10,6 +10,6 @@ public class JokeMaker {
             "Today a man knocked on my door and asked for a small donation towards the local swimming pool. I gave him a glass of water"};
 
     public static String getAJoke() {
-        return jokes[new Random().nextInt(jokes.length + 1)];
+        return jokes[new Random().nextInt(jokes.length)];
     }
 }
