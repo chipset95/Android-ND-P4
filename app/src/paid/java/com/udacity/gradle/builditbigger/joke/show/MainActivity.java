@@ -20,16 +20,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.get_joke_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, JokeActivity.class)
-                        .putExtra(JokeActivity.INTENT_EXTRA_JOKE, "HELLO WORLD"));
+                new JokeFetchTask(MainActivity.this, new JokeFetchTask.OnJokeFetchedListener() {
+                    @Override
+                    public void onJokeFetched(String joke) {
+                        startActivity(new Intent(MainActivity.this, JokeActivity.class)
+                                .putExtra(JokeActivity.INTENT_EXTRA_JOKE, joke));
+                    }
+                }).execute();
             }
         });
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("5BAE3B06309154461850E81BBBC0CB74")
-                .build();
-        mAdView.loadAd(adRequest);
     }
 }

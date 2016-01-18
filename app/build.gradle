@@ -17,10 +17,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        free {
+        }
+        paid {
+        }
+    }
 }
 
 dependencies {
     compile project(':jokes-android')
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile project(path: ':joke-teller', configuration: 'android-endpoints')
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
 }
