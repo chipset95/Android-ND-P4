@@ -41,7 +41,7 @@ public class JokeFetchTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         if (jokeApi == null) {
             jokeApi = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                    .setRootUrl("http://10.0.3.2:8080/_ah/api/")
+                    .setRootUrl("https://joke-teller-nd.appspot.com/_ah/spi/")
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {
@@ -53,6 +53,7 @@ public class JokeFetchTask extends AsyncTask<Void, Void, String> {
         try {
             return jokeApi.jokeMe().execute().getData();
         } catch (IOException e) {
+            e.printStackTrace();
             return e.getMessage();
         }
     }

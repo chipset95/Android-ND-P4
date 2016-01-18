@@ -16,7 +16,7 @@ import com.udacity.gradle.builditbigger.joker.java.JokeMaker;
  */
 @Api(
         name = "jokeApi",
-        version = "v1",
+        version = "v4",
         namespace = @ApiNamespace(
                 ownerDomain = "teller.joke.builditbigger.gradle.udacity.com",
                 ownerName = "teller.joke.builditbigger.gradle.udacity.com",
