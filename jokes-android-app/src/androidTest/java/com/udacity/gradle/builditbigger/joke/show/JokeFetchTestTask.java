@@ -16,7 +16,7 @@ import java.io.IOException;
  * Project : ProjectFour
  * Date : 17/1/16
  */
-public class JokeFetchTestTask extends AsyncTask<Void, Void, String> {
+public class JokeFetchTestTask extends AsyncTask<String, Void, String> {
     private OnJokeFetchedListener listener;
     private JokeApi jokeApi;
 
@@ -30,10 +30,11 @@ public class JokeFetchTestTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... params) {
+    protected String doInBackground(String... params) {
         if (jokeApi == null) {
             jokeApi = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                    .setRootUrl("https://joke-teller-nd.appspot.com/_ah/spi/")
+                    .setApplicationName(params[0])
+                    .setRootUrl(params[1])
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {

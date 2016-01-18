@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.udacity.gradle.builditbigger.joke.android.JokeActivity;
 
 
@@ -26,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, JokeActivity.class)
                                 .putExtra(JokeActivity.INTENT_EXTRA_JOKE, joke));
                     }
-                }).execute();
+                }).execute(getString(R.string.app_name), getString(R.string.root_url));
             }
         });
     }

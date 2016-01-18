@@ -18,7 +18,7 @@ import java.io.IOException;
  * Project : ProjectFour
  * Date : 17/1/16
  */
-public class JokeFetchTask extends AsyncTask<Void, Void, String> {
+public class JokeFetchTask extends AsyncTask<String, Void, String> {
     private ProgressDialog dialog;
     private OnJokeFetchedListener listener;
     private JokeApi jokeApi;
@@ -33,15 +33,17 @@ public class JokeFetchTask extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if (!dialog.isShowing())
+        if (!dialog.isShowing()) {
             dialog.show();
+        }
     }
 
     @Override
-    protected String doInBackground(Void... params) {
+    protected String doInBackground(String... params) {
         if (jokeApi == null) {
             jokeApi = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                    .setRootUrl("https://joke-teller-nd.appspot.com/_ah/spi/")
+                    .setApplicationName(params[0])
+                    .setRootUrl(params[1])
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {
@@ -61,8 +63,9 @@ public class JokeFetchTask extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String joke) {
         listener.onJokeFetched(joke);
-        if (dialog.isShowing())
+        if (dialog.isShowing()) {
             dialog.hide();
+        }
     }
 
     public interface OnJokeFetchedListener {

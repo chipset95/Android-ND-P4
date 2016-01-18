@@ -16,8 +16,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             @Override
             public void onJokeFetched(String joke) {
                 assertNotNull(joke);
-                assertTrue(joke.length()>0);
+                assertTrue(joke.length() > 0);
             }
-        }).execute();
+        }).execute(getContext().getString(R.string.app_name), getContext().getString(R.string.root_url));
     }
 }
