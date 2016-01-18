@@ -10,4 +10,14 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
     }
+
+    public void testJoker() {
+        new JokeFetchTestTask(new JokeFetchTestTask.OnJokeFetchedListener() {
+            @Override
+            public void onJokeFetched(String joke) {
+                assertNotNull(joke);
+                assertTrue(joke.length()>0);
+            }
+        }).execute();
+    }
 }
