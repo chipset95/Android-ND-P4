@@ -13,7 +13,7 @@ import com.udacity.gradle.builditbigger.joke.android.JokeActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String joke;
+
     private InterstitialAd mInterstitialAd;
     private AdView mAdView;
 
@@ -32,15 +32,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
+                } else {
+                    execute();
                 }
-                new JokeFetchTask(MainActivity.this, new JokeFetchTask.OnJokeFetchedListener() {
-                    @Override
-                    public void onJokeFetched(String joke) {
-                        MainActivity.this.joke = joke;
-                        startActivity(new Intent(MainActivity.this, JokeActivity.class)
-                                .putExtra(JokeActivity.INTENT_EXTRA_JOKE, joke));
-                    }
-                }).execute(getString(R.string.app_name), getString(R.string.root_url));
             }
         });
 
@@ -49,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdClosed() {
                 super.onAdClosed();
                 mInterstitialAd.loadAd(requestNewAdd());
+                execute();
             }
         });
     }
@@ -58,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("5BAE3B06309154461850E81BBBC0CB74")
                 .build();
+    }
+
+    private void execute() {
+        new JokeFetchTask(MainActivity.this, new JokeFetchTask.OnJokeFetchedListener() {
+            @Override
+            public void onJokeFetched(String joke) {
+                startActivity(new Intent(MainActivity.this, JokeActivity.class)
+                        .putExtra(JokeActivity.INTENT_EXTRA_JOKE, joke));
+            }
+        }).execute(getString(R.string.app_name), getString(R.string.root_url));
     }
 
     @Override
